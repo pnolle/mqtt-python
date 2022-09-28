@@ -2,12 +2,14 @@ import paho.mqtt.client as mqtt
 from random import randrange, uniform
 import time
 
-mqttBroker = "mqtt.eclipseprojects.io"
-client = mqtt.Client("Temperature_Inside")
-client.connect(mqttBroker)
+mqttBroker = "192.168.178.46"
+port = 8883
+topic = "sniplite"
+client = mqtt.Client("SnipLiteSender")
+client.connect(mqttBroker, port)
 
 while True:
     randNumber = uniform(20.0, 21.0)
-    client.publish("TEMPERATURE", randNumber)
-    print("Just published " + str(randNumber) + " to Topic TEMPERATURE")
+    client.publish(topic, randNumber)
+    print("Just published " + str(randNumber) + " to topic " + topic)
     time.sleep(1)
